@@ -9,10 +9,10 @@ package binarysearch2;
 
 
 //apprach 1 
-//tc :nlog n
+//tc :(n+m)log n
 //sc:o(n)
 
-//solution using hashmap with o(n) time complexity and space complexity o(n)
+//solution using hashmap with o(m+n) time complexity and space complexity o(n)
 
 //follow-up question answers:
 /*What if elements of nums2 are stored on disk, and the memory is
