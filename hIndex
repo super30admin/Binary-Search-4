@@ -1,0 +1,19 @@
+class Solution(object):
+    def hIndex(self, citations):
+        """
+        :type citations: List[int]
+        :rtype: int
+        """
+        # Idea: Brute Force Solution: H index can range from 0 to N(number of papers). For every possible h, check Count the number of papers having h or greater citations, if that count is >= h, then update the index
+        # Time Complexity: O(N*h)
+        #Space Complexity: O(1)
+        
+        if not citations:
+            return 0
+        h_index = 0
+        for i in range(1,len(citations)+1):
+            count = len([x for x in citations if x >= i])
+            if count >= i:
+                h_index = i
+        return h_index
+    
