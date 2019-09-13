@@ -53,22 +53,5 @@ class Solution {
        
         return arr;
     }
-    
-//     public static void binarySearch(int[] arr ,int num, int low , int high, List<Integer> res)
-//     {
-
-//         int mid = low + (high-low)/2;
-        
-//         while(low<=high)
-//         {
-//             if(arr[mid] == num)
-//                 res.add(arr[mid]);
-//             else if(num > arr[mid])
-//                 low = mid +1;
-//             else if(num < arr[mid])
-//                 high = mid-1;
-                
-//         }
-        
-//     }
+   
 }
