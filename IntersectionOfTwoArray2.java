@@ -4,8 +4,10 @@
  * 
  * Missed TestCase:  When arrays of equal length my comparion was not working efficiently
  * 
- * Time Complexity: O(n); Where n being the length of the larger Array
- * Space Complexity: O(m): Where m being the lenght of the smaller Array
+ * Time Complexity: O(n + m); Where n being the length of the larger Array & m being the length of smaller Array
+ * Space Complexity: O(m)
+ * 
+ * Approach: HashMap
  * 
  */
 
@@ -44,4 +46,5 @@ class Solution {
 /**
  * Solution 2: Better Approach
  * 
+ * Binary Search Approach:
  */
