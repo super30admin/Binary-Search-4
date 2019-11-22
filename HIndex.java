@@ -20,7 +20,11 @@ class HIndex {
         int start = 0, end = citations.length - 1, n = end + 1;
         while(start <= end){
             int mid = start + (end-start)/2;
-            if(citations[mid] < n-mid){
+            int diff = n - mid;
+            if(citations[mid] == diff){
+                return diff;
+            }
+            if(citations[mid] < diff){
                 start = mid + 1;
             }else{
                 end = mid - 1;
