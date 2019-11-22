@@ -14,3 +14,6 @@ class Solution {
             
         }
 }
+//SC=O(n1+n2) n1,n2+size of two sorted arrays
+//TC=O(nlogn)
+//Approach: Merged two array into new array and sorted them to find median 
