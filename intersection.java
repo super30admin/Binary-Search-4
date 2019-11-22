@@ -31,4 +31,6 @@ class Solution {
      return l;
     }
 }
-
+//SC=(n)
+//TC=O(nlogn)
+//sorted two arrays and traversed them to find the intersecting elements
