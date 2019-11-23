@@ -1,6 +1,14 @@
 # Leet code- Intersection of two arrays -2 -  https://leetcode.com/problems/intersection-of-two-arrays-ii/
+
+
+# Brute force solution -  time complexity - O(M*N)
+# Hash map solution - time complexity - O(M+N) - space complexity - O(M+N)
+
+
+
 # Time complexity - O(Nlogn)
-# Vrute force aprroach
+# space Complexity - O(1)
+# Approach - Two pointers approach
 
 class Solution(object):
     def intersect(self, nums1, nums2):
