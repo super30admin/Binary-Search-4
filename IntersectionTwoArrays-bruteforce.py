@@ -1,4 +1,4 @@
-"""Two pointers method"""
+"""Two pointers approach"""
 #Accepted on Leetcode
 #Time complexity - O(m+n)
 #Space complexity - O(1)
