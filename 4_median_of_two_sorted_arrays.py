@@ -5,7 +5,7 @@ class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         """
             https://leetcode.com/problems/median-of-two-sorted-arrays/
-            Time Complexity - O(log(min(x,y))
+            Time Complexity - O(log(min(m,n))
             Space Complexity - O(1)
             'm' is the length of nums1, 'n' is the length of nums2
         """
@@ -16,12 +16,12 @@ class Solution:
         x = len(nums1)
         y = len(nums2)
 
-        # binary search on nums1
+        # binary search on nums1 (which is always smaller)
         low, high = 0, x
         while low <= high:
-            partitionX = (low + high) / 2
-            # 1 is added to ease for both odd and even case
-            partitionY = (x + y + 1) / 2 - partitionX
+            partitionX = int((low + high) / 2)
+            # 1 is added for odd cse
+            partitionY = int((x + y + 1) / 2) - partitionX
 
             # if partitionX is 0 it means nothing is there on left side.
             # Use -INF for maxLeftX
@@ -48,7 +48,7 @@ class Solution:
             else:
                 low = partitionX + 1
         # we can come here is if input lists are not sorted
-        raise Exception('Invalid Input')
+        return -1
 
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         """
