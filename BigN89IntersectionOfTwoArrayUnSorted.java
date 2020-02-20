@@ -1,5 +1,5 @@
 // Time complexity is O(m*n)
-// Space is O(m*n) as we are using an list
+// Space is O(m+n) as we are using an list
 // This solution is submitted on leetcode
 
 import java.util.ArrayList;
