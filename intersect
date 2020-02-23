@@ -1,0 +1,35 @@
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        int in1 = 0;
+        int in2 = 0;
+        // Sort given 2 arrays
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+         
+        
+      List<Integer> result = new ArrayList<>();
+      // Iterate both arrays both start with same index  0 
+        
+    while( in1 < nums1.length && in2 < nums2.length ) {
+        System.out.println(""+ in1+":"+in2);
+        // if elements in both arrays are equal , add to result array List
+        if(nums1[in1] == nums2[in2]) {
+            result.add(nums1[in1]);
+            in1++;in2++;
+        }else if(nums1[in1] > nums2[in2]) {   // if element one array is greater than other one , increment lower element array index and continue 
+         in2 ++;   
+        }else {
+            in1 ++;
+        }
+        
+    }
+        // Convert Result arrayList to int array and return
+        int l = result.size();
+        int[] out = new int[l];
+         for(int i = 0 ; i< l ; i ++)
+              out[i] = result.get(i);
+        
+        
+       return out; 
+    }
+}
