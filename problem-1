@@ -1,0 +1,14 @@
+//Time: O(n)
+//space: O(1)
+class Solution {
+    public int hIndex(int[] citations) {
+        for(int i=0;i<citations.length;i++)
+        {
+            //hget the difference with indexes and check if value at that index is grtr or equals the diff, only possible to do if array is sorted
+            int diff=citations.length-i;
+            if(citations[i]>=diff)
+                return diff;
+        }
+        return 0;
+    }
+}
