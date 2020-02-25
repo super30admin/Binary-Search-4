@@ -12,3 +12,29 @@ class Solution {
         return 0;
     }
 }
+
+//Method 2: using binary serach since array is sorted
+//time: O(log(n))
+//space: O(1)
+class Solution {
+    public int hIndex(int[] citations) {
+        if(citations==null || citations.length==0) return 0;
+        int i=0;
+        int j=citations.length-1;
+        int n=citations.length;
+        while(i<=j)
+        {
+           int mid=i+(j-i)/2;
+            //no need to check >= because when its grtr high and low would cross each other and we can return n-i that time
+        if(citations[mid]==n-mid)
+            return n-mid;
+        else if(citations[mid]<n-mid)
+            i=mid+1;
+        else
+            j=mid-1; 
+        }
+        //why this? : because i would go to the correct place
+          return n-i;
+    }
+  
+}
