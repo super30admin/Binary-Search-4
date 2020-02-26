@@ -1,0 +1,31 @@
+//time: O(m+n)
+//space:O(1)
+class Solution {
+   	// Two Pointer Solution
+	public int[] intersect(int[] nums1, int[] nums2) {
+		List<Integer> list = new ArrayList<>();
+
+		Arrays.sort(nums1);
+		Arrays.sort(nums2);
+
+		int i = 0, size1 = nums1.length, size2 = nums2.length, j = 0;
+		while (i < size1 && j < size2) {
+			if (nums1[i] == nums2[j]) {
+				list.add(nums1[i]);
+				i++;
+				j++;
+			} else if (nums1[i] < nums2[j]) {
+				i++;
+			} else {
+				j++;
+			}
+		}
+		int[] res = new int[list.size()]; 
+        
+ for(int k=0;k<list.size();k++)
+ {
+     res[k]=list.get(k);
+ }
+   return res;          
+	}
+}
