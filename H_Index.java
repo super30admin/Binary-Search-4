@@ -1,3 +1,11 @@
+// Time Complexity :O(log(n)) where n is the number of citations.
+// Space Complexity :O(1) no additional space used.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+
+// Your code here along with comments explaining your approach
+
 class Solution {
     public int hIndex(int[] citations) {
         if(citations == null || citations.length ==0)
@@ -23,7 +31,8 @@ class Solution {
                 
             }
         return n-low;
-        // Iterative Solution
+        
+// ******Iterative Solution*********
 //         int n = citations.length;
 //         int citation = 0;
 //         int count = 0; 
