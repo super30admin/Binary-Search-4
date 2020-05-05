@@ -1,7 +1,7 @@
 # Runs on Leetcode
 
     # Solution 1
-        # Runtime - O(mlogm + n logn) wher m and n are lengths of arrays
+        # Runtime - O((m+n)log(m+n)) wher m and n are lengths of arrays
         # Memory - O(1)
       
     # Solution 2
