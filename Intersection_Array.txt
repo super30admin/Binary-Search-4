@@ -1,0 +1,70 @@
+// Time Complexity : O(max(n,m))
+// Space Complexity : O(max(n,m))
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+/* extra space 
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        
+      // for array add value and its count to hashmap 
+        for(int i = 0; i < nums1.length; i++)
+        {
+            if(map.containsKey(nums1[i])) map.put(nums1[i], map.get(nums1[i])+1);
+            else map.put(nums1[i], 1);
+        }
+    
+        //  for array 2 value is in hashmap then decrease the value count and if it is zero then remove from hashmap 
+        for(int i = 0; i < nums2.length; i++)
+        {
+            if(map.containsKey(nums2[i]) && map.get(nums2[i]) > 0)
+            {
+                result.add(nums2[i]);
+                map.put(nums2[i], map.get(nums2[i])-1);
+            }
+        }
+    
+       // arraylist result to int[] 
+       int[] r = new int[result.size()];
+       for(int i = 0; i < result.size(); i++)
+       {
+           r[i] = result.get(i);
+       }
+    
+       return r; 
+    }
+}*/
+
+/* two pointer approach  incase of sorted array*/
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+      int i = 0;
+      int j = 0;
+      int len1 = nums1.length;
+      int len2 = nums2.length;
+      
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        
+        while( i < len1  && j < len2){
+            if(nums1[i] < nums2[j])
+                i++;
+            else if(nums1[i] > nums2[j])
+                j++;
+            else {
+                result.add(nums1[i]);
+                i++; j++;
+            }
+        }
+
+        int[] r = new int[result.size()];
+       
+        for(int k = 0; k < result.size(); k++)
+       {
+           r[k] = result.get(k);
+       }
+        
+       return r; 
+    }
+}
