@@ -59,30 +59,4 @@ public class ArrayIntersection {
         }
         return resultArr;
     }
-
-    public int[] intersect_SortedArrays(int[] nums1, int[] nums2) {
-        List<Integer> result = new ArrayList<>();
-        Map<Integer, Integer> map = new HashMap<>();
-
-        //add all the numbers along with its frequencies in map
-        for (int num : nums1) {
-            map.put( num, map.getOrDefault( num, 0 ) + 1 );
-        }
-
-        //now traverse over nums2
-        for (int num : nums2) {
-            if (map.containsKey( num )) {
-                result.add( num );
-                map.put( num, map.get( num ) - 1 );
-                //when frequency becomes o for that number remove it
-                map.remove( num, 0 );
-            }
-        }
-        int[] resultArr = new int[result.size()];
-        int idx = 0;
-        for (int num : result) {
-            resultArr[idx++] = num;
-        }
-        return resultArr;
-    }
 }
