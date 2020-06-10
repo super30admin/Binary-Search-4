@@ -1,4 +1,4 @@
-//time complexity O(n) where n is the length of smaller array
+//time complexity O(n) where n is the length of larger array
 //space complexity O(1)
 
 class Solution {
