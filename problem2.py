@@ -41,7 +41,7 @@ class Solution:
 
  	def bSearch(self, elem, nums, low, high):
         while low <= high:
-            mid = (low + high) // 2
+            mid = low + (high-low) // 2
             if elem == nums[mid] and (low==mid or (low<mid and mid!=0 and nums[mid-1]!=elem)):
                 return mid+1, mid
             elif elem > nums[mid]:
