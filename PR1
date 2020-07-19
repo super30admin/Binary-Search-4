@@ -1,0 +1,45 @@
+// Time Complexity : O(logn)- where n is the number of elements in the array.
+// Space Complexity -O(1) 
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+// .our code here along with comments explaining your approach: Binary search for a mid, then find the N-i, if it is equal to the citation return mid. if diff is greater then move low=mid+1.
+
+class Solution {
+    public int hIndex(int[] citations) {
+        if(citations==null || citations.length==0) return 0;
+        int low=0;
+        int n=citations.length;
+        int high=citations.length-1;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            int diff=n-mid;
+            if(citations[mid]==diff)
+                return diff;
+            else if(citations[mid]>diff){
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return n-low;
+    }
+}
+
+// Time Complexity :	O(n) - where n is the number of elements in the array
+// Space Complexity :   O(1) 
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+// Your code here along with comments explaining your approach: Calculating the difference between the total number of citations and the index of each citation. If the diff<=the citation value present in the array, then it means that the scientist has those many citations and the people with the differnce matches the N-h<=h rule.
+
+class Solution {
+    public int hIndex(int[] citations) {
+        if(citations==null || citations.length==0) return 0;
+        for(int i=0;i<citations.length;i++){
+            int diff=citations.length-i;
+            System.out.println(diff);
+            if(diff<=citations[i]) return diff;
+        }
+        return 0;
+    }
+}
