@@ -1,5 +1,5 @@
 /********************************************Using Brute Force*************************************/
-//Time Complexity :O(n)
+//Time Complexity :O(n), number of elements in the array
 //Space Complexity :O(1)
 //Did this code successfully run on Leetcode : Yes
 //Any problem you faced while coding this : No
@@ -22,7 +22,7 @@ class H_Index_II_BruteForce{
 }
 
 /********************************************Using Binary Search*************************************/
-//Time Complexity :O(log n)
+//Time Complexity :O(log n), number of elements in the array
 //Space Complexity : O(1)
 //Did this code successfully run on Leetcode : Yes
 //Any problem you faced while coding this : No
