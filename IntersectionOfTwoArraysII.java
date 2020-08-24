@@ -1,6 +1,6 @@
 //TC: O(n+m)
 //SC: O(n), where n is the length of the smaller array
-
+//Using HashMap
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
         Map<Integer, Integer> map = new HashMap<>();
@@ -25,6 +25,7 @@ class Solution {
     }
 }
 
+//Using Two Pointers
 //TC: O(n log(n)), if sorting is considered,  O(m+n), if arrays are already sorted
 //SC: O(1)
 class Solution {
@@ -54,7 +55,8 @@ class Solution {
     }
 }
 
-//TC: n * O(log(m)), if arrays are already sorted, n is the length of smaller array
+//Using Binary Search
+//TC: O(n * log(m)), if arrays are already sorted, n is the length of smaller array
 //SC: O(1)
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
@@ -81,7 +83,6 @@ class Solution {
     }
     
     private int binarySearch(int[] arr, int low, int high, int num){
-        
         while(low <= high){
             int mid = low + (high-low)/2;
             
