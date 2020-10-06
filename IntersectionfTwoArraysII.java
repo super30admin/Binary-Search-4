@@ -1,4 +1,4 @@
-// Time Complexity : O(n1+n2)) iterate oevr two arrays
+// Time Complexity : O(n1+n2)) iterate over two arrays
 // Space Complexity : O(n1) to store the nums1 elements in the map
 // Did this code successfully run on Leetcode : Yes
 // Any problem you faced while coding this : No
