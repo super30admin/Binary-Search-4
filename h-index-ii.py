@@ -1,3 +1,6 @@
+#Time: O(logn)
+#Space: O(1)
+
 class Solution:
     def hIndex(self, citations):
         """
