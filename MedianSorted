@@ -1,0 +1,77 @@
+/*******
+Time : O(m+n)
+Space : O(m+n)
+Leetcode yes
+problem NOT OPTIMAL
+
+merging 2 arrays and then finding the middle element
+**********/
+
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int length1 = nums1.length;
+        int length2= nums2.length;
+        int i=0, j=0;
+        
+        if(length1 == 0 && length2 ==0)
+            return 0.0;
+        int[] merged = new int[length1 + length2];
+        int pos = 0;
+        
+        while(i<length1 && j< length2)
+        {
+            if(nums1[i] < nums2[j])
+            {
+                merged[pos++] = nums1[i];
+                i++;
+            }
+            
+            else if(nums2[j] < nums1[i])
+            {
+                merged[pos++] = nums2[j];
+                j++;
+            }
+            
+            else if(nums1[i] == nums2[j])
+            {
+                merged[pos++] = nums1[i];
+                merged[pos++] =nums2[j];
+                i++;
+                j++;
+            }
+        }
+        
+        if(i<length1)
+        {
+            while(i<length1)
+            {
+                 merged[pos++] = nums1[i];
+                 i++;
+            }     
+                
+        }
+        
+        if(j<length2)
+        {
+            while(j<length2)
+            {
+                 merged[pos++] = nums2[j];
+                 j++;
+            }     
+                
+        }
+        
+        // for(int k =0; k< merged.length ; k++)
+         
+        
+        double median;
+        if(merged.length%2 == 0)
+            median = (merged[merged.length/2 -1] +  merged[(merged.length/2)])/2.0;
+        
+        else
+            median = merged[merged.length/2];
+        
+        return median;
+        
+    }
+}

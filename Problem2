@@ -1,0 +1,57 @@
+/*****************
+Time O(m+n)
+Space O(n)/O(m) (depending on which array is greater)
+Leetcode yes
+Problem no
+
+Put elements of first array in hashmap with count
+iterate through second array and check if present in hashmap and value is greater than 0. if yes add it to result.
+********************/
+
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        
+        int length1 = nums1.length;
+        int length2 = nums2.length;
+        
+        if(length1== 0 || length2==0)
+            return new int[0];
+        List<Integer> result = new ArrayList<>();
+        
+        Map<Integer,Integer> map = new HashMap<>();
+            
+        for(int i= 0; i< length1;i++)
+            {
+                if(!map.containsKey(nums1[i]))
+                    map.put(nums1[i],1);
+                else
+                    map.put(nums1[i],map.get(nums1[i])+1);
+            }
+            
+            for(int j =0; j< length2;j++)
+            {
+                if(map.containsKey(nums2[j]))
+                {
+                        if(map.get(nums2[j]) > 0)
+                        {
+                            result.add(nums2[j]);
+                            map.put(nums2[j], map.get(nums2[j]) -1); 
+                        }            
+                }
+                   
+            }
+        
+    
+        int[] arr = new int[result.size()];
+        int pos = 0;
+        
+        for(Integer k : result)
+        {
+              arr[pos] = k;
+                pos++;
+        }
+       
+        return arr;
+    }
+   
+}
