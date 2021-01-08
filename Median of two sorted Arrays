@@ -1,0 +1,55 @@
+//TC: O(logmn) ??
+//SC: O(1) 
+
+//Approach: Idea is to Binary Search approach. 
+//First locate correct partition point PartX(using low & high) & partY(using combine length of both array - partX) using condition l1<r2 && l2<r1
+//If satisfying point found -> check for length if Even - avg of 2 elemnts and if odd-> return Min of rightmost(r1,r2)
+//Hint: use l1/l2/r1/r2 to adjust low and high
+
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        if(nums1==null && nums2==null){
+            return 0;
+        }
+        int n1 = nums1.length;
+        int n2 = nums2.length;
+        
+        //verify whose length is less is first
+        if(n2<n1){
+           return findMedianSortedArrays(nums2, nums1);
+        }
+        
+        //BINARY SEARCH approach
+        int low = 0;
+        int high = n1;
+
+        while(low <= high){
+            //Dividing small array by low & high && large array by (n1+n2/2)-partX
+            int partX = low + (high-low)/2;
+            int partY = ((n1+n2)/2) - partX;
+            
+            //Trying to find partition index by setting boundaries to resolve arrayIndexOutOfBound
+            double l1 = partX - 1 < 0 ? Integer.MIN_VALUE : nums1[partX - 1];
+            double l2 = partY - 1 < 0 ? Integer.MIN_VALUE : nums2[partY - 1];
+            double r1 = partX+1 > n1 ? Integer.MAX_VALUE : nums1[partX];
+            double r2 = partY+1 > n2 ? Integer.MAX_VALUE : nums2[partY];
+            
+            //IF proper partition found satisfying this condition
+            if(l1<=r2 && l2<=r1){
+                //check length
+                if((n1+n2)%2==0){
+                    return (Math.max(l1,l2) + Math.min(r1,r2))/2;  //Even->return avg. of Max(l1,l2) & Min(r1,r2)
+                }else{
+                    return Math.min(r1,r2); //Odd->return Min of right partition
+                }
+            }
+            else if(l1 > r2){
+                high = partX - 1;   //move partition to left
+            }
+            else{
+                low = partX + 1;
+            }
+        }
+        return 0;
+    }
+}
