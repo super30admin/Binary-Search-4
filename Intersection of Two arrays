@@ -1,0 +1,36 @@
+//TC: O(n)
+//SC: O(1) --> 26 characters in hashmap at max.
+
+//Approach: Idea is to use HashMap and List and put smaller array in HashMap to verify only intersecting elements are present
+
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {   
+        if(nums1==null || nums1.length==0 || nums2.length==0 || nums2==null){
+            return new int[]{};
+        }
+        
+        //If length1 > length2 --> we reverse the input as we need smaller array to put into our hashmap
+        if(nums1.length > nums2.length){
+            return intersect(nums2,nums1);
+        }
+        HashMap<Integer,Integer> hmap = new HashMap<>();
+        List<Integer> lst = new ArrayList<>();
+        
+        for(int i : nums1){
+            hmap.put(i , hmap.getOrDefault(i,0)+1);
+        }
+
+        for(int j : nums2){
+            if(hmap.containsKey(j) && hmap.get(j)>0){
+                lst.add(j);
+                hmap.put(j, hmap.get(j)-1);
+            }
+        }
+        
+        int[] res = new int[lst.size()];
+        for(int i = 0 ; i < lst.size() ; i++){
+            res[i] = lst.get(i);
+        }
+        return res;
+    }
+}
