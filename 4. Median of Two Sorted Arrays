@@ -1,0 +1,64 @@
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        
+        # cosidering the small sized list as first array
+        if(len(nums1)>len(nums2)):
+            nums1,nums2= nums2,nums1;
+        
+        l1,l2=len(nums1),len(nums2);
+        l=l1+l2;
+        print(nums1,nums2)
+        
+        left,right=0,l1;
+        
+        while(left<=right):
+            mid1=(left+right)//2;
+            mid2= (l+1)//2 - mid1;
+            
+            #find max values of left parts of two arrays
+            max1,max2=float('-inf'),float('-inf');
+            if(mid1!=0):
+                max1 = nums1[mid1-1];
+            if(mid2!=0):
+                max2= nums2[mid2-1];
+            
+            # find min values of right parts of two arrays
+            
+            min1,min2 = float('inf'),float('inf');
+            
+            if(mid1!=l1):
+                min1= nums1[mid1];
+            if(mid2 != l2):
+                min2= nums2[mid2];
+            # conditions satisfied to form a median
+            if(max1<=min2 and max2<=min1):
+                # if the sum of the lengths of two are even, the take the avg of max's and min's
+                if(l%2 ==0):
+                    return (max(max1,max2)+min(min1,min2))/2;
+                # else take the max of two left arrays max
+                else:
+                    return float(max(max1,max2));
+            # if left part of array2 max is greater than minimum of right part of arr1, 
+            # then skip the left part of array1 by moving left to mid1 + 1
+            elif(max2>min1):
+                left=mid1+1;
+            # if left part of array1 max is greater than minimum of right part of arr2, 
+            # then skip the right part of array1 by moving right to mid1 - 1
+            else:
+                right= mid1-1;
+        ''' 
+         m = length of first array
+         time complexity = O(logm)
+         '''
+                
+                
+         
+         
+                
+            
+            
+            
+        
+        
+        
+        

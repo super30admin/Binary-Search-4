@@ -1,0 +1,29 @@
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        #sort the two arrays
+        nums1.sort()
+        nums2.sort()
+        # initilize the lenghts of two arrays
+        m, n = len(nums1), len(nums2);
+        result = [];
+        # initialize two pointers with 0
+        i,j = 0, 0
+        # iterate through two arrays
+        while(i < m and j < n):
+            #increment the pointer i if the element at i is less than element at point j, 
+            # else increment j
+            if(nums1[i] < nums2[j]):
+                i += 1;
+            elif(nums1[i] > nums2[j]):
+                j += 1;
+            # if elements at i and j are equal, push the element into result
+            else:
+                result.append(nums1[i]);
+                i += 1;
+                j += 1;
+        return result;
+        
+        '''
+        time complexity = O(nlogn) + O(mlogm)
+        
+        '''
