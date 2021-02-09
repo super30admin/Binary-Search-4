@@ -1,5 +1,6 @@
-Time Complexity : O(log m) where m is length of smaller array
-Space Complexity :O(1)
+#Time Complexity : O(log m) where m is length of smaller array
+#Space Complexity :O(1)
+# Understood very well after the class :)) since I was struggling for this from a while thank you S30!    
 
 
 class Solution:
