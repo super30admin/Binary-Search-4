@@ -1,0 +1,98 @@
+//TC- o(n1+n2)
+//SC - o(n1)
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        
+        //edge case
+        if(nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0 )
+            return new int [0];
+        
+        if(nums1.length < nums2.length)
+            return intersect(nums2,nums1);
+        
+        Map<Integer,Integer> map = new HashMap<>();
+        List<Integer> result = new ArrayList<>();
+        for (int num: nums1)
+            map.put(num,map.getOrDefault(num,0)+1);
+        
+        //iterate through n2 and find the common elements
+        for(int i =0; i<nums2.length;i++){
+            if(map.containsKey(nums2[i])){
+                result.add(nums2[i]);
+                map.put(nums2[i],map.get(nums2[i])-1);
+                map.remove(nums2[i],0);
+            }
+        }
+        //as we didn't know the size we have to now revert it to int []
+        int [] r = new int [result.size()];
+        int i=0;
+        for(int num:result){
+            r[i++] = num;
+        }
+        
+        return r;
+    }
+}
+
+
+//Binary Search
+//TC- o(n2) assumed arrays were sorted
+//SC - o(1)
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        
+        //edge case
+        if(nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0 )
+            return new int [0];
+        
+        if(nums1.length < nums2.length)
+            return intersect(nums2,nums1);
+        
+        //Assume already sorted - followup question
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        
+        List<Integer> result = new ArrayList<>();
+        boolean isIntersect = false;
+        int low = 0;
+        //iterate through n2 and find the common elements
+        for(int i =0; i<nums1.length;i++){
+            int binaryIndex= binarySearch(nums2,nums1[i],low,nums2.length-1);
+            if(binaryIndex != -1) {
+                result.add(nums1[i]);
+                low = binaryIndex+1;
+            }
+        }
+        //as we didn't know the size we have to now revert it to int []
+        int [] r = new int [result.size()];
+        int i=0;
+        for(int num:result){
+            r[i++] = num;
+        }
+        
+        return r;
+    }
+    
+    private int binarySearch(int [] nums2, int target,int l, int h){
+        
+        while(l<=h){
+            int m = l +(h-l)/2;
+            //if my mid is target check is it the first occurrence of the num not
+            if(nums2[m] == target){
+                //if first Occurrence return
+                if(m == l || nums2[m] > nums2[m-1])
+                    return m;
+                //not thn keep moving left until we get first occurrence 
+                else
+                    h = m-1;
+            } else if(nums2[m] < target) {
+                l = m+1;
+            } else{
+                h = m-1;
+            }
+        
+        }
+        
+        return -1;
+    }
+}
