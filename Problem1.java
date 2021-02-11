@@ -1,29 +1,22 @@
+//Time complexity: O(nlogn+mlogm) where n and m are length of arrays. 
+//Space complexity: O(logn+logm) -> O(n+m)
+
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
         Arrays.sort(nums1);
         Arrays.sort(nums2);
-        int pnt1 = 0;
-        int pnt2 = 0;
-        ArrayList<Integer> myList = new ArrayList<Integer>();
-        while((pnt1 < nums1.length) &&(pnt2< nums2.length)){
-            if(nums1[pnt1]<nums2[pnt2]){
-                pnt1++;
-            }
-            else{
-                if(nums1[pnt1]>nums2[pnt2]){
-                    pnt2++;
-                }
-                else{
-                    myList.add(nums1[pnt1]);
-                    pnt1++;
-                    pnt2++;
-                }
+        int i = 0, j = 0, k = 0;
+        while (i < nums1.length && j < nums2.length) {
+            if (nums1[i] < nums2[j]) {
+                ++i;
+            } else if (nums1[i] > nums2[j]) {
+                ++j;
+            } else {
+                nums1[k++] = nums1[i++];
+                ++j;
             }
         }
-        int[] res = new int[myList.size()];
-        for(int i = 0; i<res.length; i++){
-            res[i] = (Integer)myList.get(i);
-        }
-        return res;
+        return Arrays.copyOfRange(nums1, 0, k);
     }
 }
+
