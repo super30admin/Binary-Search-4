@@ -1,3 +1,5 @@
+#T.C--> O(logN)
+#S.C --> O(N)
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         A, B = nums1, nums2
