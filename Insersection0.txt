@@ -1,0 +1,28 @@
+# Time Complexity: O(max(mlogm, nlogn))
+# Space Complexity: O(m+n)
+# Did this code successfully run on LeetCode: Yes
+
+# Three line Explanation:
+# 1. Sort both arrays
+# 2. Add to result when equal, otherwise move pointers to the next element
+# 3. Return result
+
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        if len(nums1) == 0 or len(nums2) == 0:
+            return []
+        nums1.sort()
+        nums2.sort()
+        one = 0
+        two = 0
+        result = []
+        while one < len(nums1) and two < len(nums2):
+            if nums1[one] == nums2[two]:
+                result.append(nums1[one])
+                one += 1
+                two += 1
+            elif nums1[one] < nums2[two]:
+                one += 1
+            else:
+                two += 1
+        return result

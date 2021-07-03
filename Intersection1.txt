@@ -1,0 +1,33 @@
+# Time Complexity: O(max(m, n))
+# Space Complexity: O(m+n)
+# Did this code successfully run on LeetCode: Yes
+
+# Three line Explanation:
+# 1. Add all the elements to a hashMap with element as the key and count as the value 
+# 2. Iterate over whichever map has fewer distinct elements and add to result if present in both maps
+# 3. Return result
+
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        map1 = dict()
+        map2 = dict()
+        for i in range(len(nums1)):
+            if nums1[i] not in map1:
+                map1[nums1[i]] = 0
+            map1[nums1[i]] += 1
+        for i in range(len(nums2)):
+            if nums2[i] not in map2:
+                map2[nums2[i]] = 0
+            map2[nums2[i]] += 1
+        result = []
+        if len(map1) < len(map2):
+            for key, value in map1.items():
+                if key in map2:
+                    for j in range(min(map1[key], map2[key])):
+                        result.append(key)
+        else:
+            for key, value in map2.items():
+                if key in map1:
+                    for j in range(min(map1[key], map2[key])):
+                        result.append(key)
+        return result
