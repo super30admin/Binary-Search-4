@@ -32,10 +32,10 @@ class Solution:
             # is odd or even. If even we take max of 1st and 3rd partition and min of
             # 2nd and 4th partition
             if l1 <= r2 and r1 <= l2:
-                if (n1 + n2) % 2 == 0:
-                    return (max(l1,r1) + min(l2, r2))/2
+                if ((n1 + n2) % 2) != 0:
+                    return min(l2, r2)
                 else:
-                    return max(r1, l2)
+                    return (max(l1, r1) + min(l2, r2))/2
             # if 1st partition element is greater than 4th then we decrement high 
             # pointer else we increment low pointer
             elif l1 > r2:
