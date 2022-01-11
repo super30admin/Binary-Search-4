@@ -10,7 +10,7 @@ class Solution {
 
         // make nums1 smaller array always
         if (nums2.length < nums1.length) {
-            findMedianSortedArrays(nums2, nums1);
+            return findMedianSortedArrays(nums2, nums1);
         }
 
         int m=nums1.length, n=nums2.length;
