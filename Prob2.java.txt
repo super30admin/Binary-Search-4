@@ -1,0 +1,35 @@
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        
+        if(nums1.length > nums2.length) return findMedianSortedArrays(nums2,nums1);
+        int m = nums1.length;
+        int n = nums2.length;
+        
+        int low = 0;
+        int high = nums1.length;
+        
+        int partitionX,partitionY;
+        
+        while(low <= high){
+            partitionX = low+(high-low)/2;
+            partitionY = ((m+n)/2)-partitionX;
+            
+            double left1 = (partitionX == 0) ? Integer.MIN_VALUE : nums1[partitionX-1];
+            double left2 = (partitionY == 0) ? Integer.MIN_VALUE : nums2[partitionY-1];
+            double right1 = (partitionX == m) ? Integer.MAX_VALUE : nums1[partitionX];
+            double right2 = (partitionY == n) ? Integer.MAX_VALUE : nums2[partitionY];
+            
+            if(left1 <= right2 && left2 <= right1){
+                if((m+n)%2 == 0){
+                    return (Math.max(left1,left2)+Math.min(right1,right2))/2;
+                }else
+                    return Math.min(right1,right2);
+            }else if(left1 > right2)
+                high = partitionX -1;
+            else
+                low = partitionX +1;
+            
+        }
+       return 0.0; 
+    }
+}
