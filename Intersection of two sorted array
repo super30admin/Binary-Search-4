@@ -1,0 +1,58 @@
+//TC = O(nlogm) -> if m>>>n then nlogm < mlogn
+//SC = O(1)
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+      
+        if(nums1.length > nums2.length){
+            return intersect(nums2, nums1);
+        }
+        
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        
+        List<Integer> result = new ArrayList<>();
+        
+        int start = 0;
+        
+        for(int num : nums1){
+            
+            int index = binarySearch(nums2, start, nums2.length-1, num);
+            
+            if(index != -1){
+                result.add(num);
+                start = index+1;
+            }
+        }
+        
+        int[] resultArr = new int[result.size()];
+        
+        for(int i = 0; i<result.size(); i++){
+            resultArr[i] = result.get(i);
+        }
+        
+        return resultArr;
+        
+    }
+    
+    private int binarySearch(int[] arr, int start, int end, int target){
+        
+        while(start<=end){
+            
+            int mid = start + (end-start)/2;
+            
+            if(target == arr[mid]){
+                
+                if(mid == start || arr[mid-1] != target){
+                    return mid;
+                }
+                    end = mid-1;
+                
+            }else if(target < arr[mid]){
+                end = mid-1;
+            }else{
+                start = mid+1;
+            }
+        }
+        return -1;
+    }
+}
