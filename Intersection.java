@@ -85,4 +85,10 @@ public class Intersection {
 
         return -1;
     }
+    // [1,2,3,4,4,5,7,9]
+    // [3,4,4,7,9]
+
+    // Wrong here
+    // [1,2,2,1]
+    // [2,2]
 }
