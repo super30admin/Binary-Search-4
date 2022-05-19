@@ -1,4 +1,12 @@
 class Solution {
+
+    //Time Complexity: 0(log(min(m,n) where m is the length of nums1 and n is the length of nums2
+    //Space Complexity: 0(1)
+    //Did it successfully run on leetcode: Yes
+    //Did you face any problem while coding: No
+
+    //Explain your approach in short:
+
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int m = nums1.length;
         int n = nums2.length;
