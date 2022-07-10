@@ -37,15 +37,23 @@ class Solution:
     """
     Ideation-Partition using Binary search. TC O(log(min(n1, n2))), SC O(1)
 
-    The idea is to put a partition at one of the array and the other array would be partition itself satisying the elements in the partition are half of the total combined array size.
+    The idea is to put a partition at one of the array and the other array would be partition itself satisfying the
+    elements in the partition are half of the total combined array size.
 
     Once you partition, check for all the elements on the left side of partition are smaller than one to the right.
-    To verify this, we compare the nums1[l1] < nums2[r2] and nums1[l2] < nums2[r1], since all the other elements are already smaller given the sorted arrays.
-    If nums1[l1] < nums2[r2] is not true, we want to move our partition to the left to decrease l1 and increase r1 to be able to reach our satisfying rule. Hence, high = mid - 1, pruning all right partitions making the problem O(logN). Similarlym if nums1[l2] < nums2[r1] is not true, you move your partition to the right of the mid. Hence, low = mid + 1.
-    When comparing the satisfied conditions, our partition could be extremes and we might not have either of l1, l2, r1, r2, consider comparing it with smallest value of integer for l1, l2, and largest value for r1, r2.
+    To verify this, we compare the nums1[l1] < nums2[r2] and nums1[l2] < nums2[r1], since all the other elements are
+    already smaller given the sorted arrays.
+    If nums1[l1] < nums2[r2] is not true, we want to move our partition to the left to decrease l1 and increase r1 to
+    be able to reach our satisfying rule. Hence, high = mid - 1, pruning all right partitions making the problem
+    O(logN). Similarly, if nums1[l2] < nums2[r1] is not true, you move your partition to the right of the mid.
+    Hence, low = mid + 1.
+    When comparing the satisfied conditions, our partition could be extremes and we might not have either of
+    l1, l2, r1, r2, consider comparing it with the smallest value of integer for l1, l2, and largest value for r1, r2.
 
-    Once the correct partition is found and length of combined elements is odd, our median (middle) would be min(r1, r2), i.e. our next element, first smallest element on right partition.
-    else, if length is even, our median would be average of last element in first partitiona and first element in second, i.e. (max(l1, l2) + min(r1, r2)) // 2.
+    Once the correct partition is found and length of combined elements is odd, our median (middle) would be
+    min(r1, r2), i.e. our next element, first smallest element on right partition.
+    else, if length is even, our median would be average of last element in first partition and first element in
+    second, i.e. (max(l1, l2) + min(r1, r2)) // 2.
 
     NOTE- Always perform the binary partition on smaller size array to have better time complexity.
 """
@@ -85,7 +93,8 @@ class Solution:
 
         """
         Ideation- Two pointer merge, TC O((m + n) / 2), SC O((m + n) / 2)
-        Our median is middle of the combine sorted array, we can stop our sorting at middle. We also, need average of middle and middle + 1 for even, so our desired length is middle + 1.
+        Our median is middle of the combine sorted array, we can stop our sorting at middle. We also, need average of 
+        middle and middle + 1 for even, so our desired length is middle + 1.
         """
 
         def findMedianSortedArrays1(self, nums1, nums2):
