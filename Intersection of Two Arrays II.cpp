@@ -1,4 +1,4 @@
-//Time Complexity- O(min(m,n)log(max(m,n)))
+//Time Complexity- O(nlogn+mlogm)
 //Space Complexity- O(1)
 
 class Solution {
