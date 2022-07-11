@@ -1,6 +1,6 @@
 #Approach : Binary Search
 #Time complexity : O(mlogn) where m is the size of smaller array for iterating over it and logn for doing binary search on the bigger array 
-#Space complexity : O(m) for storing the smaller array in the hashmap
+#Space complexity : O(1) 
 #Did this code successfully run on Leetcode : Yes
 #youtube : https://www.youtube.com/watch?v=euobyCF1OMQ&ab_channel=%7BS30%7D
 class Solution:
