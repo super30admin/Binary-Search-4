@@ -161,3 +161,69 @@ class Solution {
         
     }
 }
+
+//****MEDIAN OF TWO SORTED ARRAY
+//Time complexity:o(log(n1)) n1 is the length of smaller array
+//Space compelxity:o(1);
+//Leetcode runnable: Y;
+//Any doubts: N;
+
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        
+        //Null case
+        if(nums1.length==0 && nums2.length==0) return 0.0;
+          int n1=nums1.length;
+        int n2=nums2.length;
+        
+        if(n1>n2) return findMedianSortedArrays(nums2, nums1);
+      
+        int low=0;
+        //High wont be n1-1 because we are playing with the partition index and not the element index
+        int high=n1;
+        
+        while(low<=high)
+        {
+            //Partition index of x
+            int px=low+(high-low)/2;
+            //Partition index of y
+            int py=(n1+n2)/2-px;
+            
+            //Now need to check whether the partition is correct or not
+            //For that we need l1,r1, l2,r2;
+            //We as well need to take care if that is the start partition 
+            //If its start go with -infinity
+            double l1= px==0 ? Integer.MIN_VALUE : nums1[px-1];
+            double l2= py==0 ? Integer.MIN_VALUE : nums2[py-1];
+            double r1= px==n1 ? Integer.MAX_VALUE : nums1[px];
+            double r2= py==n2 ? Integer.MAX_VALUE : nums2[py];
+            
+            //Correct partition
+            if(l1<=r2 && l2<=r1)
+            {
+                //Checking for whether it is odd or even
+                if((n1+n2)%2==0)
+                {
+                    return (Math.min(r1,r2)+Math.max(l1,l2))/2;
+                }
+                else
+                {
+                    return Math.min(r1,r2);
+                }
+                
+            }
+            else if(l1>r2)
+            {
+                high=px-1;
+            }
+            else
+            {
+                low=px+1;
+            }
+            
+        }
+        
+        return 8.99;
+        
+    }
+}
