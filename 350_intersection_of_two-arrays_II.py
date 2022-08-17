@@ -49,41 +49,36 @@ def get_input():
     return inp1, inp2
 
 class Solution:
-    def intersect_with_hashmaps(self, nums1: List[int], nums2: List[int]) -> List[int]:
+    def intersect_with_hashmap(self, nums1: List[int], nums2: List[int]) -> List[int]:
         '''
         Time complexity : O(m + n) where m is length of list 1 and n is length of list 2. as we traverse over both lists.
-        Space complexity: O(m + n) as we create two auxiliary hash maps with keys in list1 and list2.
+        Space complexity: O(min(m,n)) as we create an auxiliary hash map with keys in shorter list.
         '''
         if len(nums1) == 0 or len(nums2) == 0:
             return []
 
-        map1 = {}
-        for num in nums1:
-            if num not in map1:
-                map1[num] = 1
-            else:
-                map1[num] += 1
-
-        map2 = {}
-        for num in nums2:
-            if num not in map2:
-                map2[num] = 1
-            else:
-                map2[num] += 1
-
+        hashmap = {}
         result = []
-        for key, count in map1.items():
-            if key in map2.keys():
-                cnt = min(count, map2[key])
-                while cnt:
-                    result.append(key)
-                    cnt -= 1
+
+        if len(nums1) > len(nums2):
+            return self.intersect_with_hashmap(nums2, nums1)
+
+        for num in nums1:
+            if num not in hashmap:
+                hashmap[num] = 1
+            else:
+                hashmap[num] += 1
+
+        for num in nums2:
+            if num in hashmap and hashmap[num] > 0:
+                result.append(num)
+                hashmap[num] -= 1
 
         return result
 
     def intersect_with_sorting(self, nums1: List[int], nums2: List[int]) -> List[int]:
         '''
-        Time complexity : O(n log n + m log m + n + m), as we sort both lists and then traverse over them with 2 pointers.
+        Time complexity : O(n log n + m log m + n + m)  ~= O(max(m log m , n log n)), as we sort both lists and then traverse over them with 2 pointers.
         Space complexity: O(1) No auxiliary space is used.
         '''
         if len(nums1) == 0 or len(nums2) == 0:
@@ -107,6 +102,60 @@ class Solution:
 
         return result
 
+    def binary_search(self, nums, low, high, key):
+        while low <= high:
+            mid = low + (high - low) // 2
+            if key == nums[mid]:
+                # if you are at left most element of the array
+                if mid == low or nums[mid - 1] < nums[mid]:
+                    return mid
+                # Here we try to find the first occurence of a number
+                high = mid - 1
+
+            elif key < nums[mid]:
+                high = mid - 1
+            else:
+                low = mid + 1
+        return -1
+
+    def intersect_with_binary_search(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        '''
+        Time complexity : O(m log m + n log n + m * log n),
+                                    m log m  : to sort list 1
+                                    n log n  : to sort list 2
+                                    m * log n: to traverse over shorter list and perform binary search over the longer list.
+
+                                    In our case m < n always, as we are making sure nums1 is always the smaller list.
+                                    
+        Space complexity: O(1), as we are not using any auxiliary space.
+        '''
+        if len(nums1) == 0 or len(nums2) == 0:
+            return []
+
+        # O(m log m)
+        nums1.sort()
+
+        # O(n log n)
+        nums2.sort()
+
+        if len(nums1) > len(nums2):
+            return self.intersect_with_binary_search(nums2, nums1)
+
+        result = []
+        low = 0
+        high = len(nums2) - 1
+
+        # Iterate over the smaller array and perform binary search on second array
+        # O(m * log n)
+        for i in range(len(nums1)):
+            b_search_index = self.binary_search(nums2, low, high, nums1[i])
+            if b_search_index != -1:
+                result.append(nums1[i])
+                low = b_search_index + 1
+
+        return result
+
+
 
 # Driver code
 solution = Solution()
@@ -114,5 +163,6 @@ inp1, inp2 = get_input()
 print("Input lists are: ")
 print(f"List 1: {inp1}")
 print(f"List 2: {inp2}")
-print(f"Approach 1: With hash maps: Intersection of the two lists: {solution.intersect_with_hashmaps(inp1, inp2)}")
-print(f"Approach 2: With sorting:   Intersection of the two lists: {solution.intersect_with_hashmaps(inp1, inp2)}")
+print(f"Approach 1: With hash maps:   Intersection of the two lists: {solution.intersect_with_hashmap(inp1, inp2)}")
+print(f"Approach 2: With sorting  :   Intersection of the two lists: {solution.intersect_with_sorting(inp1, inp2)}")
+print(f"Approach 3: Binary search :   Intersection of the two lists: {solution.intersect_with_binary_search(inp1, inp2)}")
