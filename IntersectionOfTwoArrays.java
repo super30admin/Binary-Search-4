@@ -1,7 +1,8 @@
 
-//#Technique1
-//TC = O(m+n) Traversing the first array to add in HashMap and check the values in second array that exists or not in HashMap
-//Space = O(1) we are not using any extra space here
+//Technique1 : Add to HashMap
+//Time Complexity = O(m+n) Traversing the first array to add in HashMap and check the values in second array that exists or not in HashMap
+//Space Complexity = O(1) we are not using any extra space here
+
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
         int n1 = nums1.length;
@@ -30,6 +31,54 @@ class Solution {
                 
             }
         }
+        int [] arrayResult = new int[result.size()];
+        for(int k=0; k<result.size(); k++){
+            arrayResult[k] = result.get(k);
+        }
+        return arrayResult;
+    }
+
+}
+
+
+//Technique2 : Two Pointers
+//Time Complexity = O(max(m,n)) Traversing the first array  and Second Array, atleast we will traverse fully one Array, thats max(arr1,arr2)
+//Space Complexity = O(1) we are not using any extra space here
+//TC = O(m+n)
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        int n1 = nums1.length;
+        int n2 = nums2.length;
+
+        //if(n2>n1) return intersect(nums2, nums1);
+        
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        
+        
+
+        List<Integer> result = new ArrayList<>();
+        
+        int pointer1 = 0;
+        int pointer2 = 0;
+        while(pointer1 < n1 && pointer2 < n2){
+            if(nums1[pointer1] == nums2[pointer2]){
+                result.add(nums1[pointer1]);
+                 pointer1++;
+                 pointer2++;
+                
+            }
+            else if(nums1[pointer1] < nums2[pointer2]){
+                pointer1++;
+            }
+            else{
+                pointer2++;
+            }
+            
+        }
+   
+        System.out.println(result);
+        
         int [] arrayResult = new int[result.size()];
         for(int k=0; k<result.size(); k++){
             arrayResult[k] = result.get(k);
