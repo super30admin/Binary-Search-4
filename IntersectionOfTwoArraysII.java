@@ -40,7 +40,7 @@ class Solution {
 //		return res;
 		
 		// Two Pointer approach
-		// Time Complexity : O(mlogm) + O(nlogn) where m = number of elements in nums1, n = number of elements in nums2
+		// Time Complexity : O(mlogm) + O(nlogn) + O(m) + O(n) where m = number of elements in nums1, n = number of elements in nums2
         // Space Complexity : O(k) where k = number of common elements in nums1 & nums2
 //        int n1 = nums1.length, n2 = nums2.length, p1 = 0, p2 = 0;
 //        List<Integer> result = new ArrayList<>();
