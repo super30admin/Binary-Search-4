@@ -1,4 +1,4 @@
-# Time complexity : O(n) --> n = length of smaller array
+# Time complexity : O(log n) --> n = length of smaller array
 # Space complexity : O(1)
 # Leetcode : Solved and submitted
 class Solution:
