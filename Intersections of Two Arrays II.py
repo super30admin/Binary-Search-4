@@ -1,5 +1,5 @@
 # TC : O(NlogN) - N is the length of the longest array
-# SC : O(1)
+# SC : O(n)
 class Solution:
     def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
         nums1.sort()
