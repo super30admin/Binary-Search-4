@@ -55,3 +55,15 @@ class Solution {
         return result;
     }
 }
+
+
+//approach -3
+/*assume both arrays are sorted
+ * so nums1 has p1 and nums2 has p2 as pointers. 
+ * when p1 == p2; add value to result and increment both pointers. 
+ * when p1 < p2; increment p1;
+ * when p2 < p1; increment p2;
+ * at last return result.
+ * tc - O(m log m) + O(n log n) + O(m+n)
+ * sc- O(Min of(m,n)) - creating list  
+ */
