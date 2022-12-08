@@ -1,4 +1,4 @@
-//TimeComplexity. O(logn)
+//TimeComplexity. O(log(l1))
 //spaceComplexity O(1)
 
 
