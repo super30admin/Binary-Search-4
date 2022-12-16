@@ -6,6 +6,11 @@
 // Time Complexity : O(m+n) for iterating over small array to create hashmap and then iterating over larger array to find match
 // Space Complexity : O(min(m,n)) for creating hashmap of small array and also result list will be of max size min(m, n)
 
+// for hashmap based solution
+// Time Complexity : O(nLogn)
+// Space Complexity : O(min(m, n)) for creating a list of atmost min(m,n) elements
+
+
 // Did this code successfully run on Leetcode : yes
 
 
@@ -103,5 +108,58 @@ public class IntersectionOfTwoArrays {
 
         return answer;
 
+    }
+
+
+    //sorting both arrays and then using binary search approach
+    public int[] intersectBinarysearch(int[] nums1, int[] nums2) {
+        if(nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0 ){
+            return new int[]{};
+        }
+
+        int m = nums1.length;
+        int n = nums2.length;
+
+        if(n < m){
+            return intersectBinarysearch(nums2, nums1);
+        }
+
+        List<Integer> result = new ArrayList<>();
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int low = 0;
+
+        for(int i = 0; i < m; i++){ //iterate over smaller array and binary search in larger array
+            int bsIndex = binarySearch(nums2, low, n-1, nums1[i]);
+            if(bsIndex != -1){
+                result.add(nums1[i]);
+                low = bsIndex + 1;
+            }
+        }
+
+        int[] answer = new int[result.size()];
+        for(int i = 0; i < result.size(); i++){
+            answer[i] = result.get(i);
+        }
+
+        return answer;
+
+    }
+
+    private int binarySearch(int[] nums, int low, int high, int target){
+        while(low <= high){
+            int mid = low + (high - low)/2; //to avoid integer overflow
+            if(nums[mid] == target){
+                if(mid == low || nums[mid-1] != target){
+                    return mid;
+                }
+                high = mid-1;
+            }else if(target > nums[mid]){
+                low = mid + 1;
+            }else{
+                high = mid -1;
+            }
+        }
+        return -1; //didn't find element
     }
 }
