@@ -1,6 +1,10 @@
-//Time Complexity :  O(log n)
-//Space Complexity :  O(log n)
-//Did this code successfully run on Leetcode : Yes
+// Intersection of Two Arrays II
+// Time Complexity : O(n log m), 
+// where n is the length of the smaller array and m is the length of the larger array
+// Space Complexity : O(k), 
+// where k is the size of the list )
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
 
 import java.util.*;
 

@@ -1,8 +1,10 @@
-//Time Complexity :  O(log n)
-//Space Complexity :  O(log n)
-//Did this code successfully run on Leetcode : Yes
+// Median of Two Sorted Arrays
+// Time Complexity : O(log n), where n is the length of the smaller array
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
 
-class Solution {
+class MedianOfTwoSortedArray {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         if (nums1.length == 0 && nums2.length == 0) return 0.0;
         int n1=nums1.length;
