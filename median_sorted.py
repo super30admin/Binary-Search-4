@@ -1,5 +1,5 @@
 # Time Complexity :
-# O(log (min(m.n)))
+# O(log (min(m,n)))
 
 # Space Complexity :
 # O(1)
