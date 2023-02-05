@@ -16,7 +16,6 @@
 #Now that we have the partition, if the total number of elements is odd, we just return the min of the two elements right of each of the paritions as we need the center element and the min among them is the center
 #If the total number of elements is even, then we pick the max of both the left values, add it to the min of right values, divide this sum by 2 and return.
 
-
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         low = 0
@@ -29,21 +28,24 @@ class Solution:
                 self.findMedianSortedArrays(nums2,nums1)
 
         high = n1
-        partition = 0
-        second_partition = 0
-        while low < high :
+
+        while low <= high :
             partition = low + int((high - low )/2)
+            second_partition = int ((n1+n2) / 2)  - partition
 
-            second_partition =int ( (n1+n2) / 2 ) - partition
+            if second_partition > n2:
+                low = partition + 1
+                continue
+            if second_partition < 0 :
+                high = partition - 1
+                continue
 
-            print (low,high,partition,second_partition)
-
-            if partition != low :
+            if partition != 0 :
                 l1 = nums1[partition-1]
             else :
-                l1 = - 10 ** 7
+                l1 = -10 ** 7
             
-            if partition != high:
+            if partition != n1:
                 r1 = nums1[partition]
             else :
                 r1 = 10 ** 7
@@ -51,7 +53,7 @@ class Solution:
             if second_partition != 0 :
                 l2 = nums2[second_partition-1]
             else :
-                l2 = - 10 ** 7
+                l2 =  -10 ** 7
             
             if second_partition != n2:
                 r2 = nums2[second_partition]
@@ -65,7 +67,7 @@ class Solution:
                     return (max(l1,l2) + min(r1,r2))/2
 
             if l1 < r2 and l2 > r1 :
-                low = partition
+                low = partition + 1
 
             if l1 > r2 and l2 < r1 :
                 high = partition - 1
