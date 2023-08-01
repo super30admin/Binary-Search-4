@@ -21,8 +21,10 @@ public class Problem350 {
         for(int i=0;i<m;i++){
             int target=nums1[i];
             int bsIndex=binarySearch(nums2,low,high,target);
-            if(bsIndex!=-1)
+            if(bsIndex!=-1) {
                 result.add(target);
+                low=bsIndex+1;
+            }
 
         }
         int[] finalResult=new int[result.size()];
@@ -39,6 +41,9 @@ public class Problem350 {
             if(nums2[mid]==target){
                if(mid==low || nums2[mid]!=nums2[mid-1]){
                    return mid;
+               }
+               else{
+                   high=mid-1;
                }
             }
             else if(nums2[mid]>target)
