@@ -1,0 +1,42 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red25\green25\blue25;}
+{\*\expandedcolortbl;;\cssrgb\c12941\c12941\c12941;}
+\margl1440\margr1440\vieww28600\viewh15260\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+class Solution:\
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:\
+        partx = float("-inf")\
+        party = float("-inf")\
+        n1 = len(nums1)\
+        n2 = len(nums2)\
+        if n1 > n2:\
+            return self.findMedianSortedArrays(nums2, nums1)\
+        l = 0\
+        h = n1\
+        while l <= h:\
+            partx = (h + l) // 2\
+            party = (n1 + n2)//2 - partx\
+            \
+            l1 = nums1[partx - 1] if partx else float("-inf")\
+            r1 = float("inf") if partx == n1 else nums1[partx]\
+            l2 = nums2[party - 1] if party else float("-inf")\
+            r2 = float("inf") if party == n2 else nums2[party]\
+            \
+            if l1 <= r2 and l2 <= r1:\
+                if((n1 + n2) % 2 == 0):\
+                    return (max(l1, l2) + min(r1, r2)) / 2\
+                else:\
+                    return min(r1, r2)\
+         \
+            elif l2 > r1:\
+                l = partx + 1\
+            else:\
+                h = partx - 1\
+            \
+                \
+                \
+        }
