@@ -1,0 +1,27 @@
+#time complexity: O(log n1+n2)
+#space complexity: O(1)
+#did it run on leetcode: yes
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        n1,n2 = len(nums1), len(nums2)
+        if n1 == 0 and n2 == 0: return 0.0
+        if n1>n2: return self.findMedianSortedArrays(nums2,nums1)
+        low,high = 0, n1
+        while(low<=high):
+            partx = low+(high-low)//2
+            party = (n1+n2)//2 - partx
+            L1 = -inf if partx==0 else nums1[partx-1]
+            R1 = inf if partx == n1 else nums1[partx]
+            L2 = -inf if party == 0 else nums2[party-1]
+            R2 = inf if party == n2 else nums2[party]
+            if L1<=R2 and L2<=R1:
+                if (n1+n2)%2 == 0:
+                    return (max(L1,L2)+min(R1,R2))/2.0
+                else:
+                    return min(R1,R2)
+            elif L2>R1:
+                low = partx+1
+            else:
+                high = partx-1
+        
+        return 6262.2622
