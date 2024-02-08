@@ -1,0 +1,27 @@
+#Intersection of Two Arrays II
+
+#time complexity is O(n1 + n2)
+#space complexity is O(n1 + min(n1, n2))
+
+from collections import Counter
+
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        # Count the frequency of each element in nums1
+        counter1 = Counter(nums1)
+        
+        # Initialize the result list
+        result = []
+        
+        # Iterate through nums2
+        for num in nums2:
+            # If the element is present in counter1 and its count is greater than 0
+            if num in counter1 and counter1[num] > 0:
+                # Add the element to the result list
+                result.append(num)
+                # Decrement the count of the element in counter1
+                counter1[num] -= 1
+        
+        return result
+
+        
