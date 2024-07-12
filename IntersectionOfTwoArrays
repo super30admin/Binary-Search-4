@@ -1,0 +1,71 @@
+Binary Search : T.c --> O(mlogm)+O(nlogn)+nlogm, S.c --> O(1) 
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+       int m = nums1.length;
+       int n = nums2.length;
+       if(m<n){
+        return intersect(nums2,nums1);
+       } 
+       Arrays.sort(nums1);
+       Arrays.sort(nums2);       
+       List<Integer> result = new ArrayList<>();
+       int index = 0;
+       for(int i =0; i<nums2.length; i++){
+        int loc = binarysearch(nums1,nums2[i],index);
+        if(loc < nums1.length && nums1[loc] == nums2[i]){
+          result.add(nums1[loc]);
+          index = loc+1;
+        }
+       }
+       int[] res = new int[result.size()];
+       int i =0;
+       for(Integer r : result){
+           res[i] = r;
+           i++;
+       }
+       return res;
+    }
+    private int binarysearch(int[] nums1, int target , int index){
+        int low = index; int high = nums1.length-1;
+        while(low <= high){
+            int mid = low+(high-low)/2;                 
+            if(nums1[mid] < target){
+                low = mid+1;
+            }else{
+                high = mid-1;
+            }
+        }
+        return low;
+    }
+}
+*******************************************************************************
+HashMap : T.c --> O(m+n), S.c --> O(n) , where n is the smallest array.
+
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+       HashMap<Integer,Integer> map = new HashMap<>();
+       List<Integer> result = new ArrayList<>();
+       int m = nums1.length;
+       int n = nums2.length;
+       if(m<n){
+        return intersect(nums2,nums1);
+       } 
+       for(int i =0; i<nums2.length; i++){
+        map.put(nums2[i],map.getOrDefault(nums2[i],0)+1);
+       }
+       for(int i =0; i<nums1.length; i++){
+        if(map.containsKey(nums1[i])){
+           result.add(nums1[i]); 
+           map.replace(nums1[i],map.getOrDefault(nums1[i],0)-1);
+           map.remove(nums1[i],0);
+        }
+       }
+       int[] res = new int[result.size()];
+       int i =0;
+       for(Integer r: result){
+          res[i] = r;
+          i++; 
+       }
+       return res;
+    }
+}
