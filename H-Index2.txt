@@ -1,0 +1,28 @@
+// Time Complexity : O(log n)
+// Space Complexity : O(1)
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+
+class Solution{
+public int hIndex(int[] citations) {
+    /* edge case */
+    if(citations == null || citations.length == 0)
+        return 0;
+    
+	int len = citations.length;
+	int lo = 0, hi = len - 1;
+	while (lo <= hi) {
+        /* get mid */
+		int med = (hi + lo) / 2;
+        /* if mid value is equal to len - mid*/
+		if (citations[med] == len - med) {
+			return len - med;
+		} else if (citations[med] < len - med) {
+			lo = med + 1;
+		} else { 
+			hi = med - 1;
+		}
+	}
+	return len - lo; // by default
+}
+}
