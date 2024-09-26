@@ -1,0 +1,122 @@
+// Time Complexity : overall O(nlogn)- nlgn for sorting, O(mlogn) - for searching. Where m is the size of the smaller array and n is the size of the larger array.
+// Space Complexity : O(n) - where n is the number of intersection elements stored in the list.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+// Your code here along with comments explaining your approach: Sort the two lists given. For each element in the smaller array, binary search on the longer array to get the occurrence of the first occurrence of the element, once we find an element in the second array we start our binary search from the element next to the one found within the second array.
+
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+       if(nums1==null || nums2==null || nums1.length==0 || nums2.length==0) 
+           return new int[0];
+        int n1=nums1.length;int n2=nums2.length;
+        if(n1>n2) return intersect(nums2,nums1);
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);//nlgn
+        List<Integer> l=new ArrayList<>();
+        //pointer on the second array.
+        int idx=0;
+        for(int num:nums1){
+            int bSearch=binarySearch(nums2,idx,nums2.length-1,num);
+            if(bSearch!=-1){
+                l.add(num);
+                idx=bSearch+1;
+            }
+        }
+       
+        int[] result=new int[l.size()]; 
+        for(int i=0;i<result.length;i++){
+            result[i]=l.get(i);
+        }
+        return result;
+    }
+    
+    private int binarySearch(int[] nums,int low,int high,int target){
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(nums[mid]==target){
+                if(mid==low || nums[mid]>nums[mid-1])
+                    return mid;
+                else
+                    high=mid-1;
+            }
+            else if(nums[mid]>target){
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return -1;
+    }
+}
+
+
+// Time Complexity : O(m+n) - where m and n are the sizes of the two arrays.
+// Space Complexity : O(n) - where n is the number of intersection elements stored in the list.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+// Your code here along with comments explaining your approach: Approach is to start with two pointers one in each array and find the intersection by trying to capture the intersecting elements.
+
+
+
+
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+       if(nums1==null || nums2==null || nums1.length==0 || nums2.length==0) return new int[0];
+        int n1=nums1.length;int n2=nums2.length;
+        if(n1>n2) return intersect(nums2,nums1);
+        Arrays.sort(nums1);Arrays.sort(nums2);
+        List<Integer> l=new ArrayList<>();
+        int p1=0;int p2=0;
+        while(p1< nums1.length && p2< nums2.length)
+        {
+            if(nums1[p1]==nums2[p2]) {
+                l.add(nums1[p1]);
+                p1++; p2++;
+            }
+            else if(nums1[p1]< nums2[p2])
+                p1++;
+            else
+                p2++;
+            
+        }
+        int[] result=new int[l.size()]; 
+        for(int i=0;i<result.length;i++){
+            result[i]=l.get(i);
+        }
+        return result;
+    }
+}
+
+// Time Complexity : O(m+n) - where m and n are the sizes of the two arrays.
+// Space Complexity :O(m)- one of the arrays is stored in the hash map with its occurrence of each element.
+// Did this code successfully run on Leetcode : Yes
+// Any problem you faced while coding this : No
+// Your code here along with comments explaining your approach: Use a hash map to store all the elements with the key and the number of occurrences. Once the number of occurrences hits zero while we are traveling through the second array remove it from the hash map. The intersected elements are stored in a list.
+
+
+
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+       if(nums1==null || nums2==null || nums1.length==0 || nums2.length==0) return new int[0];
+        int n1=nums1.length;int n2=nums2.length;
+        if(n1>n2) return intersect(nums2,nums1);
+        Map<Integer,Integer> hmap=new HashMap<Integer,Integer>();
+        for(int num: nums1){
+            hmap.put(num,hmap.getOrDefault(num,0)+1);
+        }
+        List<Integer> l=new ArrayList<>();
+        for(int num:nums2){
+            if(hmap.containsKey(num)){
+                l.add(num);
+                hmap.put(num,hmap.get(num)-1);
+                hmap.remove(num,0);
+            }
+        }
+        int[] result=new int[l.size()]; 
+        for(int i=0;i<result.length;i++){
+            result[i]=l.get(i);
+        }
+        return result;
+    }
+}
