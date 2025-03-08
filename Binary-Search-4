@@ -1,0 +1,132 @@
+// Time Complexity :O(m+n)
+// Space Complexity :O(min(m,n))
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach: take hashmap for adding elements and frquency which has smaller length then looping over the another array and checking whether element exist in hashmpa or not if exist adding that element to result array as well reducing count of element in hashmap and removing if it becoms zero.
+//Hashmap Solution
+
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        int n1=nums1.length;
+        int n2=nums2.length;
+        HashMap<Integer,Integer> sMap=new HashMap<>(); //sp: //O(n) 
+        List<Integer> result=new ArrayList<>();
+        if(n1 > n2){
+            intersect(nums2,nums1); //making first array as small always
+        }
+        //hashmap for array which is smaller length to reduce space complexity
+        for(int i=0;i<n1;i++){ //O(n)
+               if(!sMap.containsKey(nums1[i])){
+                sMap.put(nums1[i],1); 
+               }else{
+                sMap.put(nums1[i],sMap.get(nums1[i])+1);
+               }
+        }
+        for(int j=0;j<n2;j++){ // O(m)
+            if(sMap.containsKey(nums2[j])){
+                  sMap.put(nums2[j],sMap.get(nums2[j])-1);
+                  sMap.remove(nums2[j],0);
+                  result.add(nums2[j]);
+            }
+        }
+        int[] re=new int[result.size()];
+        for(int i=0;i<re.length;i++){
+            re[i]=result.get(i);
+        }
+        return re;
+    }
+}
+
+
+// Time Complexity :O(mlogm+nlogn+m+n)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach: first i sort both arrays because i am baout use two pointers approach then i took pointers and by checking comparsion moving pointers in worest case the time complexity would be summation of two array lengths
+//two pointers
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        int n1=nums1.length;
+        int n2=nums2.length;
+       List<Integer> result=new ArrayList<>();
+        if(n1 > n2){
+            intersect(nums2,nums1);
+        }
+        Arrays.sort(nums1); //mlogm
+       Arrays.sort(nums2); //mlogn
+        int p1=0;
+        int p2=0;
+        while(p1 != n1  && p2 != n2){ // m+n
+            if(nums1[p1] == nums2[p2]){
+                result.add(nums1[p1]);
+                p1++;
+                p2++;
+            }else if(nums1[p1] > nums2[p2]){
+                p2++;
+            }else{
+                p1++;
+            }
+        }
+        int[] re=new int[result.size()];
+        for(int i=0;i<re.length;i++){
+            re[i]=result.get(i);
+        }
+        return re;
+    }
+}
+
+
+// Time Complexity :O(m*logn)
+// Space Complexity :O(1)
+// Did this code successfully run on Leetcode :yes
+// Any problem you faced while coding this :no
+// Your code here along with comments explaining your approach:here for each elemt in smaller lentgh array i am doing binary search on anther array which has bigger length
+//binarySearch
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        int n1 = nums1.length;
+        int n2 = nums2.length;
+        List<Integer> result = new ArrayList<>();
+        if (n1 > n2) {
+            return intersect(nums2, nums1);
+        }
+        Arrays.sort(nums1); // mlogm
+        Arrays.sort(nums2); // mlogn
+        int low = 0;
+        int high = n2 - 1;
+        for (int i = 0; i < n1; i++) {//O(m)
+            int target = nums1[i];
+            int bIndex = binarySearch(nums2, low, high, target);
+            if (bIndex != -1) {
+                result.add(nums1[i]);
+                low = bIndex + 1;
+            }
+        }
+        int[] re = new int[result.size()];
+        for (int i = 0; i < re.length; i++) {
+            re[i] = result.get(i);
+        }
+        return re;
+    }
+
+    public int binarySearch(int[] nums2, int low, int high, int target) {
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (nums2[mid] == target) {
+                if (mid == low || nums2[mid] > nums2[mid - 1]) {
+                    return mid;
+                } else {
+                    high = mid - 1;
+                }
+            } else if (target > nums2[mid]) {
+                low = mid + 1;
+
+            } else {
+                high = mid - 1;
+            }
+        }
+        return -1;
+    }
+}
+
+
