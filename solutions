@@ -1,0 +1,97 @@
+## Problem1 
+class Solution {
+
+  public int[] intersect(int[] nums1, int[] nums2) {
+
+      int first = 0, second = 0;
+
+      // sort both arrays
+
+      Arrays.sort(nums1);
+
+      Arrays.sort(nums2);
+
+      // result 
+
+      List<Integer> result = new LinkedList<>();
+
+      while(first < nums1.length && second < nums2.length) {
+
+          // same values, add to result
+
+          if(nums1[first] == nums2[second]) {
+
+              result.add(nums1[first]);
+
+              first++;
+
+              second++;
+
+          } else if(nums1[first] > nums2[second]) {
+
+              second++;
+
+          } else {
+
+              first++;
+
+          }
+
+      }
+
+      int[] intersection = new int[result.size()];
+
+      int i = 0;
+
+      for(int r: result) {
+
+          intersection[i++] = r;
+
+      }
+
+      return intersection;
+
+  }
+
+}
+
+## Problem2
+
+class Solution {
+ public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        if(nums1==null && nums2==null){
+            return 0.0;
+        }
+        int n1 = nums1.length;
+        int n2 = nums2.length;
+        if(n1 > n2) return findMedianSortedArrays(nums2, nums1);
+        int low = 0; 
+        int high = n1;
+        while(low <= high){
+            int partX = low +(high - low)/2;
+            int partY = (n1+n2)/2 - partX;
+            int L1 = partX == 0 ? Integer.MIN_VALUE : nums1[partX - 1];
+            int L2 = partY == 0 ? Integer.MIN_VALUE : nums2[partY - 1];
+            int R1 = partX == n1 ? Integer.MAX_VALUE : nums1[partX];
+            int R2 = partY == n2 ? Integer.MAX_VALUE : nums2[partY];
+            if(L1 <= R2 && L2 <= R1){
+                //correct partition
+                //find median
+                if((n1+n2)%2 == 0){
+                    //even
+                    return (Math.min(R1, R2) + Math.max(L1, L2))/2d;
+                } else {
+                    //odd
+                    return Math.min(R1, R2);
+                }
+            } else if(L1 > R2){
+               high = partX - 1; 
+            } else {
+                low = partX + 1;
+            }
+        }
+        return 7d;
+        
+    }
+}
+
