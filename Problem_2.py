@@ -79,7 +79,7 @@ def findMedianSortedArrays(nums1, nums2):
     # high = index of partition s.t. high and right of high contains all elements in the right partition
     # Using binary search, we converge low and high to find a common partition point
     low = 0
-    high = M # Note: it's not M-1!! (a quirk of this problem)
+    high = M # Note: it's not M-1 because the last partition index is M! (a quirk of this problem)
     while low <= high: # O(log M)
         m1 = low + (high - low)//2
         m2 =  partition_size - m1

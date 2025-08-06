@@ -91,7 +91,7 @@ def intersect_2(nums1, nums2):
     # use the smaller array as the first array
     # Why? To reduce space complexity of hash map
     if M > N:
-        intersect_2(nums2, nums1)
+       return intersect_2(nums2, nums1)
 
     result = []
     h = defaultdict(int)
@@ -161,7 +161,7 @@ def intersect_4(nums1, nums2):
     # use the smaller array as the first array
     # and perform binary search on the second array (larger)
     if M > N:
-        intersect_4(nums2, nums1)
+       return intersect_4(nums2, nums1)
 
     result = []
     nums1 = sorted(nums1.copy())
