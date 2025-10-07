@@ -1,0 +1,40 @@
+// Time Complexity: O(n + m)
+// Space Complexity: O(Min(n, m))
+
+// Store all the elements of the smaller array with their frequency to the hashmap
+// Check if each element in the 2nd array is present in the map. If yes reduce the frequency in the map and add element to result array
+// If frequency of an element becomes 0 remove it from the map 
+
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        List<Integer> result = new ArrayList<>();
+        HashMap<Integer, Integer> mp = new HashMap<>();
+        int n1 = nums1.length;
+        int n2 = nums2.length;
+        
+        if(n1 > n2)
+            return intersect(nums2, nums1);
+        
+        // Add smaller array elements into the map
+        for(int num : nums1) {
+            mp.put(num, mp.getOrDefault(num, 0) + 1);
+        }
+
+        // Checking for intersection
+        for(int num : nums2) {
+            if(mp.containsKey(num)) {
+                result.add(num);
+                mp.put(num, mp.get(num)-1);
+                mp.remove(num, 0);
+            }
+        }
+        
+        // Create result array
+        int[] answer = new int[result.size()];
+        for(int i = 0; i < result.size(); i++) {
+            answer[i] = result.get(i);
+        }
+        
+        return answer;
+    }
+}
