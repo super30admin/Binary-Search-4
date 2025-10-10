@@ -57,10 +57,6 @@ class SortedSolution {
         int n1 = nums1.length;
         int n2 = nums2.length;
 
-        if (n1 > n2) {
-            return intersect(nums2, nums1);
-        }
-
         // sorting both arrays for follow up
         Arrays.sort(nums1);
         Arrays.sort(nums2);
