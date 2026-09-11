@@ -1,0 +1,36 @@
+//Time Complexity: O(m+n) where m and n are length of the input arrays
+//Space Complexity: O(min(m,n))
+class Solution {
+    ArrayList<Integer> res;
+    HashMap<Integer, Integer> map;
+
+    public int[] intersect(int[] nums1, int[] nums2) {
+        this.res = new ArrayList<>();
+        this.map = new HashMap<>();
+
+        if (nums1.length > nums2.length) {
+            return intersect(nums2, nums1);
+        }
+
+        for (int num : nums1) {
+            if (map.containsKey(num)) {
+                map.put(num, map.getOrDefault(num, 0) + 1);
+            } else {
+                map.put(num, 1);
+            }
+        }
+
+        for (int num : nums2) {
+            if (map.containsKey(num)) {
+                if (map.get(num) != 0)
+                {
+                    res.add(num);
+                    map.put(num, map.getOrDefault(num, 0) - 1);
+                } else {
+                    continue;
+                }
+            }
+        }
+        return res.stream().mapToInt(Integer::intValue).toArray();
+    }
+}
